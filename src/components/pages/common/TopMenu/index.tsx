@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 
-import { useLocation } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
 
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge, Button } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge } from '@material-ui/core';
 
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 // import MoreIcon from '@material-ui/icons/MoreVert';
@@ -16,30 +15,25 @@ import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import HomeIcon from '@material-ui/icons/Home';
 
 import { useTopMenuStyles } from './styles';
-import { openDialog } from '../../../../app/dialog/dialog.actions';
+import { useSelect } from '../../../../utils/selector.utils';
+import { authSelectors } from '../../../../app/auth/auth.selectors';
 
 export const TopMenu: FunctionComponent = () => {
-  const dispatch = useDispatch();
-
   const classes = useTopMenuStyles();
 
   const { pathname } = useLocation();
   const showFilledHome = useMemo(() => pathname === '/', [pathname]);
 
-  const openConfirmation = useCallback(() => {
-    dispatch(
-      openDialog('confirmation', {
-        title: 'Hello world!',
-        message: 'Look at console!',
-        onDeny: () => {
-          console.log('Deny action');
-        },
-        onConfirm: () => {
-          console.log('Confirm action');
-        },
-      }),
-    );
-  }, [dispatch]);
+  const history = useHistory();
+
+  const currentUserId = useSelect(authSelectors.selectLoggedUser);
+  const handleOpenProfile = useCallback(() => {
+    if (currentUserId) {
+      history.push(`/profile/${currentUserId}`);
+    } else {
+      history.push(`/login`);
+    }
+  }, [currentUserId, history]);
 
   return (
     <div className={classes.grow}>
@@ -91,7 +85,7 @@ export const TopMenu: FunctionComponent = () => {
               aria-label="account of current user"
               // aria-controls={menuId}
               aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
+              onClick={handleOpenProfile}
               color="inherit"
             >
               <AccountCircle />
@@ -108,7 +102,6 @@ export const TopMenu: FunctionComponent = () => {
               <MoreIcon />
             </IconButton>
           </div> */}
-          <Button onClick={openConfirmation}> Click me</Button>
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}
