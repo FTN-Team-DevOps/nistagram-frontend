@@ -9,18 +9,17 @@ import * as userService from '../resource/user/user.saga-service';
 
 import { storeUser } from '../resource/user/user.actions';
 
-import { omit } from 'lodash';
-
-function* logUserIn(user: IUserWithToken) {
+function* logUserIn(userWithToken: IUserWithToken) {
   // order matters!
-  yield put(actions.storeLoggedUser(user.id));
-  yield put(actions.storeAccessToken(user.token));
+  yield put(actions.storeLoggedUser(userWithToken.user._id));
+  yield put(actions.storeAccessToken(userWithToken.token));
+  // store role
 
-  yield put(storeUser(omit(user, 'token')));
+  yield put(storeUser(userWithToken.user));
 }
 
-function* cacheLoggedUser(user: IUserWithToken) {
-  yield call([localStorage, localStorage.setItem], 'logged_user', JSON.stringify(user));
+function* cacheLoggedUser(userWithToken: IUserWithToken) {
+  yield call([localStorage, localStorage.setItem], 'logged_user', JSON.stringify(userWithToken.user));
 }
 
 export function* loadCachedUser() {
@@ -44,14 +43,14 @@ export function* register(userInfo: IUserCreate, picture: File | null) {
 }
 
 export function* logIn(credentials: IUserCredentials) {
-  const user = (yield call(apiRequest, api.loginApi(credentials))) as IUserWithToken;
+  const userWithToken = (yield call(apiRequest, api.loginApi(credentials))) as IUserWithToken;
 
-  if (!user) {
+  if (!userWithToken) {
     return;
   }
 
-  yield call(logUserIn, user);
-  yield call(cacheLoggedUser, user);
+  yield call(logUserIn, userWithToken);
+  yield call(cacheLoggedUser, userWithToken);
 }
 
 export function* logOut() {

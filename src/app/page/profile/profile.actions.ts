@@ -2,7 +2,7 @@ import * as types from './profile.types';
 import * as constants from './profile.constants';
 import { IUser, IUserUpdate } from '../../resource/user/user.types';
 
-export const setupProfilePage = (userId: IUser['id']): types.ISetupProfilePage => ({
+export const setupProfilePage = (userId: IUser['_id']): types.ISetupProfilePage => ({
   type: constants.SETUP_PROFILE_PAGE,
   payload: userId,
 });
@@ -15,12 +15,12 @@ export const updateUser = (userInfo: IUserUpdate, picture: File | null): types.I
   },
 });
 
-export const deleteUser = (userId: IUser['id']): types.IDeleteUser => ({
+export const deleteUser = (userId: IUser['_id']): types.IDeleteUser => ({
   type: constants.DELETE_USER,
   payload: userId,
 });
 
-export const storeSearchedUser = (searchedUser: IUser['id']): types.IStoreSearchedUser => ({
+export const storeSearchedUser = (searchedUser: IUser['_id']): types.IStoreSearchedUser => ({
   type: constants.STORE_SEARCHED_USER,
   payload: searchedUser,
 });

@@ -8,7 +8,7 @@ export const ensureArray = <T>(p: T | T[]): T[] => (Array.isArray(p) ? p : [p]);
 export const mergeIds = <TResource extends types.IResource>(
   prevIds: types.IResourceIdType[],
   resources: TResource | TResource[],
-): types.IResourceIdType[] => uniq([...prevIds, ...ensureArray(resources).map((resource) => resource.id)]);
+): types.IResourceIdType[] => uniq([...prevIds, ...ensureArray(resources).map((resource) => resource._id)]);
 
 export const filterIds = (
   prevIds: types.IResourceIdType[],
@@ -24,7 +24,7 @@ export const mergeById = <TResource extends types.IResource>(
   ...ensureArray(resources).reduce(
     (newById, resource) => ({
       ...newById,
-      [resource.id]: resource,
+      [resource._id]: resource,
     }),
     {},
   ),

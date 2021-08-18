@@ -22,7 +22,7 @@ export interface ILogout {
 
 export interface IStoreLoggedUser {
   type: typeof constants.STORE_LOGGED_USER;
-  payload: IUser['id'];
+  payload: IUser['_id'];
 }
 
 export interface IClearLoggedUser {
@@ -41,11 +41,11 @@ export interface IClearAccessToken {
 export type IAuthAction = IStoreLoggedUser | IClearLoggedUser | IStoreAccessToken | IClearAccessToken;
 
 export interface IAuthState {
-  loggedUser: IUser['id'] | null;
+  loggedUser: IUser['_id'] | null;
   accessToken: string | null;
 }
 
-export interface ISelectLoggedUser extends ISelector<IUser['id'] | null> {}
+export interface ISelectLoggedUser extends ISelector<IUser['_id'] | null> {}
 export interface ISelectAccessToken extends ISelector<string | null> {}
 
 export interface IAuthSelectors {

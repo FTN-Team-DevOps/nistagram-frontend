@@ -13,6 +13,7 @@ const loggedUserReducer: Reducer<types.IAuthState['loggedUser'], types.IStoreLog
   action,
 ) => {
   if (isActionOfType<types.IStoreLoggedUser>(action, constants.STORE_LOGGED_USER)) {
+    console.log(action);
     return action.payload;
   } else if (isActionOfType<types.IClearLoggedUser>(action, constants.CLEAR_LOGGED_USER)) {
     return null;

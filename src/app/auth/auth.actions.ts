@@ -20,7 +20,7 @@ export const logOut = (): types.ILogout => ({
   type: constants.LOGOUT,
 });
 
-export const storeLoggedUser = (loggedUser: IUser['id']): types.IStoreLoggedUser => ({
+export const storeLoggedUser = (loggedUser: IUser['_id']): types.IStoreLoggedUser => ({
   type: constants.STORE_LOGGED_USER,
   payload: loggedUser,
 });

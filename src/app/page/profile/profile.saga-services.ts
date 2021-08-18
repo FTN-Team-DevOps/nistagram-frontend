@@ -7,8 +7,8 @@ import * as actions from './profile.actions';
 import { selectWithParams } from '../../../utils/selector.utils';
 import { userSelectors } from '../../resource/user/user.selectors';
 
-export function* setupProfilePage(userId: IUser['id']) {
-  const searchedUsers = (yield call(userResourceService.searchUsers, { id: userId })) as IUser['id'];
+export function* setupProfilePage(userId: IUser['_id']) {
+  const searchedUsers = (yield call(userResourceService.searchUsers, { _id: userId })) as IUser['_id'];
 
   yield put(
     searchedUsers && searchedUsers[0] ? actions.storeSearchedUser(searchedUsers[0]) : actions.clearSearchedUser(),
@@ -19,7 +19,7 @@ export function* setupProfilePage(userId: IUser['id']) {
 }
 
 export function* updateUser(userInfo: IUserUpdate, picture: File | null) {
-  const oldUser = (yield selectWithParams(userSelectors.selectResourceById, userInfo.id)) as IUser;
+  const oldUser = (yield selectWithParams(userSelectors.selectResourceById, userInfo._id)) as IUser;
   const pictureUrl = oldUser.picture;
   // if (picture) {
   //   pictureUrl = yield call(fileService.updateImage, {
@@ -32,7 +32,7 @@ export function* updateUser(userInfo: IUserUpdate, picture: File | null) {
   yield call(userResourceService.updateUser, { ...userInfo, picture: pictureUrl });
 }
 
-export function* deleteUser(userId: IUser['id']) {
+export function* deleteUser(userId: IUser['_id']) {
   yield call(userResourceService.deleteUser, userId);
   yield put(actions.clearSearchedUser());
 }

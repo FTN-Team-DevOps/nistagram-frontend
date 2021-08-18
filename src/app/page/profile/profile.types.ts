@@ -3,10 +3,10 @@ import { IUser, IUserUpdate } from '../../resource/user/user.types';
 
 import * as constants from './profile.constants';
 
-// Current user id or user id from path
+// Current user _id or user _id from path
 export interface ISetupProfilePage {
   type: typeof constants.SETUP_PROFILE_PAGE;
-  payload: IUser['id'];
+  payload: IUser['_id'];
 }
 
 // Update user from dialog
@@ -20,12 +20,12 @@ export interface IUpdateUser {
 
 export interface IDeleteUser {
   type: typeof constants.DELETE_USER;
-  payload: IUser['id'];
+  payload: IUser['_id'];
 }
 
 export interface IStoreSearchedUser {
   type: typeof constants.STORE_SEARCHED_USER;
-  payload: IUser['id'];
+  payload: IUser['_id'];
 }
 
 export interface IClearSearchedUser {
@@ -39,14 +39,14 @@ export type IProfilePageAction = IStoreSearchedUser | IClearSearchedUser;
 // | IClearSearchedPublications;
 
 export interface IProfilePageState {
-  searchedUser: IUser['id'] | null;
-  // searchedActivities: IActivity['id'][];
-  // searchedPublications: IPublication['id'][];
+  searchedUser: IUser['_id'] | null;
+  // searchedActivities: IActivity['_id'][];
+  // searchedPublications: IPublication['_id'][];
 }
 
-export interface ISelectSearchedUser extends ISelector<IUser['id'] | null> {}
-// export interface ISelectSearchedPublications extends ISelector<IPublication['id'][]> {}
-// export interface ISelectSearchedActivities extends ISelector<IActivity['id'][]> {}
+export interface ISelectSearchedUser extends ISelector<IUser['_id'] | null> {}
+// export interface ISelectSearchedPublications extends ISelector<IPublication['_id'][]> {}
+// export interface ISelectSearchedActivities extends ISelector<IActivity['_id'][]> {}
 
 export interface IProfilePageSelectors {
   selectSearchedUser: ISelectSearchedUser;
