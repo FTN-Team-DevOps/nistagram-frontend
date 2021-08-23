@@ -19,9 +19,25 @@ const initialUserRequestState = {
   deleteUser: initialRequestState,
 };
 
+const initialPublicationRequestState = {
+  searchPublications: initialRequestState,
+  createPublication: initialRequestState,
+  updatePublication: initialRequestState,
+  deletePublication: initialRequestState,
+};
+
+const initialActivityRequestState = {
+  searchActivities: initialRequestState,
+  createActivity: initialRequestState,
+  updateActivity: initialRequestState,
+  deleteActivity: initialRequestState,
+};
+
 const initialState: types.IApiState = {
   ...initialAuthRequestState,
   ...initialUserRequestState,
+  ...initialPublicationRequestState,
+  ...initialActivityRequestState,
 };
 
 // exception to the rule, because of dynamic keys on state, it was easier to bundle everything into one reducer

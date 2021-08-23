@@ -20,7 +20,7 @@ export const LoginForm: FunctionComponent<ILoginFormProps> = ({ onSubmit }) => {
   useEffect(() => {
     if (error && !passwordReset.current) {
       formProps.reset({
-        username: formProps.getValues().username,
+        email: formProps.getValues().email,
         password: '',
       });
       passwordReset.current = true;
@@ -37,7 +37,7 @@ export const LoginForm: FunctionComponent<ILoginFormProps> = ({ onSubmit }) => {
   return (
     <FormProvider {...formProps}>
       <form id="login-form" onSubmit={formProps.handleSubmit(onSubmit)}>
-        <FormTextInput name="username" label="Username" defaultValue="" validation={requiredValidation} />
+        <FormTextInput name="email" label="Email" defaultValue="" validation={requiredValidation} />
         <FormTextInput
           name="password"
           label="Password"
