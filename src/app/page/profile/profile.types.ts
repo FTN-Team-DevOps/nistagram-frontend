@@ -1,4 +1,5 @@
 import { ISelector } from '../../common/common.types';
+import { IPublication, IPublicationCreate } from '../../resource/publication/publication.types';
 import { IUser, IUserUpdate } from '../../resource/user/user.types';
 
 import * as constants from './profile.constants';
@@ -32,24 +33,40 @@ export interface IClearSearchedUser {
   type: typeof constants.CLEAR_SEARCHED_USER;
 }
 
-export type IProfilePageAction = IStoreSearchedUser | IClearSearchedUser;
+export interface ICreatePublication {
+  type: typeof constants.CREATE_PUBLICATION;
+  payload: IPublicationCreate;
+}
+
+export interface IStoreSearchedPublications {
+  type: typeof constants.STORE_SEARCHED_PUBLICATIONS;
+  payload: IPublication['_id'][];
+}
+
+export interface IClearSearchedPublications {
+  type: typeof constants.CLEAR_SEARCHED_PUBLICATIONS;
+}
+
+export type IProfilePageAction =
+  | IStoreSearchedUser
+  | IClearSearchedUser
+  | IStoreSearchedPublications
+  | IClearSearchedPublications;
 // | IStoreSearchedActivities
 // | ICLearSearchedActivities
-// | IStoreSearchedPublications
-// | IClearSearchedPublications;
 
 export interface IProfilePageState {
   searchedUser: IUser['_id'] | null;
+  searchedPublications: IPublication['_id'][];
   // searchedActivities: IActivity['_id'][];
-  // searchedPublications: IPublication['_id'][];
 }
 
 export interface ISelectSearchedUser extends ISelector<IUser['_id'] | null> {}
-// export interface ISelectSearchedPublications extends ISelector<IPublication['_id'][]> {}
+export interface ISelectSearchedPublications extends ISelector<IPublication['_id'][]> {}
 // export interface ISelectSearchedActivities extends ISelector<IActivity['_id'][]> {}
 
 export interface IProfilePageSelectors {
   selectSearchedUser: ISelectSearchedUser;
-  // selectSearchedPublications: ISelectSearchedPublications;
+  selectSearchedPublications: ISelectSearchedPublications;
   // selectSearchedActivities: ISelectSearchedActivities;
 }

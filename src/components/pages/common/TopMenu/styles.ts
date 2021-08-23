@@ -8,6 +8,7 @@ export const useTopMenuStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    cursor: 'pointer',
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',

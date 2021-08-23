@@ -11,3 +11,6 @@ export const CLEAR_LOGGED_USER = createActionConst(AUTH_NAMESPACE, 'CLEAR_LOGGED
 
 export const STORE_ACCESS_TOKEN = createActionConst(AUTH_NAMESPACE, 'STORE_ACCESS_TOKEN');
 export const CLEAR_ACCESS_TOKEN = createActionConst(AUTH_NAMESPACE, 'CLEAR_ACCESS_TOKEN');
+
+export const STORE_ROLE = createActionConst(AUTH_NAMESPACE, 'STORE_ROLE');
+export const CLEAR_ROLE = createActionConst(AUTH_NAMESPACE, 'CLEAR_ROLE');

@@ -8,5 +8,5 @@ export const UserOnlyRoute: FunctionComponent<RouteProps> = (props) => {
   const loggedUser = useSelector(authSelectors.selectLoggedUser);
   const role = useSelector(authSelectors.selectRole);
 
-  return !loggedUser || role !== 'user' ? <Redirect to={'/'} /> : <Route {...props} />;
+  return !loggedUser || role !== 'admin' ? <Redirect to={'/'} /> : <Route {...props} />;
 };
