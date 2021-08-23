@@ -4,7 +4,7 @@ import { IDictionary, ISelector, ISelectorWithParams } from '../../common/common
 export type IResourceIdType = string;
 
 export interface IResource {
-  id: IResourceIdType;
+  _id: IResourceIdType;
 }
 
 export interface IStoreResourceAction<TResource extends IResource> {

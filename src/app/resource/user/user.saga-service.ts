@@ -9,10 +9,10 @@ import { IUser, IUserCreate, IUserSearchParams, IUserUpdate } from './user.types
 
 export function* storeUser(user: IUser) {
   yield put(actions.storeUser(user));
-  return user.id;
+  return user._id;
 }
 
-export function* clearUser(userId: IUser['id']) {
+export function* clearUser(userId: IUser['_id']) {
   yield put(actions.clearUser(userId));
 }
 
@@ -23,7 +23,7 @@ export function* searchUsers(searchParams?: IUserSearchParams) {
     return;
   }
 
-  const userIds = (yield all(users.map((user) => call(storeUser, user)))) as IUser['id'][];
+  const userIds = (yield all(users.map((user) => call(storeUser, user)))) as IUser['_id'][];
   return userIds;
 }
 
@@ -34,7 +34,7 @@ export function* createUser(userInfo: IUserCreate) {
     return;
   }
 
-  const userId = (yield call(storeUser, user)) as IUser['id'];
+  const userId = (yield call(storeUser, user)) as IUser['_id'];
   return userId;
 }
 
@@ -45,11 +45,11 @@ export function* updateUser(userInfo: IUserUpdate) {
     return;
   }
 
-  const userId = (yield call(storeUser, user)) as IUser['id'];
+  const userId = (yield call(storeUser, user)) as IUser['_id'];
   return userId;
 }
 
-export function* deleteUser(userId: IUser['id']) {
+export function* deleteUser(userId: IUser['_id']) {
   yield call(apiRequest, api.deleteUserApi(userId));
   yield call(clearUser, userId);
   return userId;

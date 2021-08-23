@@ -10,6 +10,7 @@ import { AppBar, Toolbar, IconButton, Typography, InputBase, Badge } from '@mate
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import HomeIcon from '@material-ui/icons/Home';
@@ -17,9 +18,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import { useTopMenuStyles } from './styles';
 import { useSelect } from '../../../../utils/selector.utils';
 import { authSelectors } from '../../../../app/auth/auth.selectors';
+import { logOut } from '../../../../app/auth/auth.actions';
+import { useDispatch } from 'react-redux';
 
 export const TopMenu: FunctionComponent = () => {
   const classes = useTopMenuStyles();
+  const dispatch = useDispatch();
 
   const { pathname } = useLocation();
   const showFilledHome = useMemo(() => pathname === '/', [pathname]);
@@ -35,13 +39,21 @@ export const TopMenu: FunctionComponent = () => {
     }
   }, [currentUserId, history]);
 
+  const handleLogOut = useCallback(() => {
+    dispatch(logOut());
+  }, [dispatch]);
+
+  const handleHomeClick = useCallback(() => {
+    history.push(`/`);
+  }, [history]);
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
           <div className={classes.grow} />
 
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" noWrap onClick={handleHomeClick}>
             Nistagram
           </Typography>
           <div className={classes.search}>
@@ -58,7 +70,7 @@ export const TopMenu: FunctionComponent = () => {
             />
           </div>
           <div className={classes.sectionDesktop}>
-            <IconButton>
+            <IconButton onClick={handleHomeClick}>
               {showFilledHome ? (
                 <HomeIcon
                   style={{
@@ -66,7 +78,11 @@ export const TopMenu: FunctionComponent = () => {
                   }}
                 />
               ) : (
-                <HomeOutlinedIcon />
+                <HomeOutlinedIcon
+                  style={{
+                    color: 'white',
+                  }}
+                />
               )}
             </IconButton>
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -82,7 +98,7 @@ export const TopMenu: FunctionComponent = () => {
             </IconButton> */}
             <IconButton
               edge="end"
-              aria-label="account of current user"
+              aria-label="Current User Account"
               // aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleOpenProfile}
@@ -90,6 +106,18 @@ export const TopMenu: FunctionComponent = () => {
             >
               <AccountCircle />
             </IconButton>
+            {currentUserId && (
+              <IconButton
+                edge="end"
+                aria-label="Current User Account"
+                // aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleLogOut}
+                color="inherit"
+              >
+                <ExitToAppIcon />
+              </IconButton>
+            )}
           </div>
           {/* <div className={classes.sectionMobile}>
             <IconButton
