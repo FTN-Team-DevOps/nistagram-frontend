@@ -33,11 +33,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
         image: fmladenovic/devops
-<<<<<<< HEAD
         tags: frontend-v1.0.1, frontend-latest
-=======
-        tags: frontend-v1, frontend-latest
->>>>>>> 6b5f0243e3ce80934d9582d0c570b90f41d5ddfb
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
