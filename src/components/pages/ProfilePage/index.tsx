@@ -41,7 +41,7 @@ export const ProfilePage: FunctionComponent = () => {
     );
   }, [dispatch]);
 
-  console.log(publicationIds);
+  console.log(publicationIds, isPrivate);
 
   return (
     <PageLayout>
