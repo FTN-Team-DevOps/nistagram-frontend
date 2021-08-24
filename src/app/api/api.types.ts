@@ -5,8 +5,10 @@ import { AxiosRequestConfig } from 'axios';
 
 type IAuthApiRouteKey = 'login';
 type IUserApiRouteKey = 'searchUsers' | 'createUser' | 'updateUser' | 'deleteUser';
+type IPublicationApiRouteKey = 'searchPublications' | 'createPublication' | 'updatePublication' | 'deletePublication';
+type IActivityApiRouteKey = 'searchActivities' | 'createActivity' | 'updateActivity' | 'deleteActivity';
 
-export type IApiRouteKey = IAuthApiRouteKey | IUserApiRouteKey;
+export type IApiRouteKey = IAuthApiRouteKey | IUserApiRouteKey | IPublicationApiRouteKey | IActivityApiRouteKey;
 
 export interface IApiError {
   status: number;
