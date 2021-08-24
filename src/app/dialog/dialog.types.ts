@@ -2,11 +2,13 @@ import { ISelectorWithParams } from '../common/common.types';
 import * as constants from './dialog.constants';
 
 import { IConfirmationDialogProps } from '../../components/dialogs/ConfirmationDialog/types';
+import { IPublicationDialogProps } from '../../components/dialogs/PublicationDialog/types';
 
-export type IDialogKey = 'confirmation';
+export type IDialogKey = 'confirmation' | 'publicationDialog';
 
 interface IDialogInstancePropsInternal {
   confirmation: IConfirmationDialogProps;
+  publicationDialog: IPublicationDialogProps;
 }
 
 export type IDialogInstanceProps<TDialogKey extends IDialogKey = IDialogKey> = TDialogKey extends IDialogKey

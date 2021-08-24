@@ -22,11 +22,11 @@ export const updateUserApi = (data: IUserUpdate): IApiRequestConfig => ({
   data,
 });
 
-export const deleteUserApi = (userId: IUser['id']): IApiRequestConfig => ({
+export const deleteUserApi = (userId: IUser['_id']): IApiRequestConfig => ({
   apiRouteKey: 'deleteUser',
   uri: 'users',
   method: 'delete',
   params: {
-    id: userId,
+    _id: userId,
   },
 });

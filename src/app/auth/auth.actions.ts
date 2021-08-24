@@ -3,12 +3,17 @@ import { IUser, IUserCreate, IUserCredentials } from '../resource/user/user.type
 import * as types from './auth.types';
 import * as constants from './auth.constants';
 
-export const register = (userInfo: IUserCreate, picture: File | null): types.IRegister => ({
+// export const register = (userInfo: IUserCreate, picture: File | null): types.IRegister => ({
+//   type: constants.REGISTER,
+//   payload: {
+//     data: userInfo,
+//     picture,
+//   },
+// });
+
+export const register = (userInfo: IUserCreate): types.IRegister => ({
   type: constants.REGISTER,
-  payload: {
-    data: userInfo,
-    picture,
-  },
+  payload: userInfo,
 });
 
 export const logIn = (credentials: IUserCredentials): types.ILogin => ({
@@ -20,7 +25,7 @@ export const logOut = (): types.ILogout => ({
   type: constants.LOGOUT,
 });
 
-export const storeLoggedUser = (loggedUser: IUser['id']): types.IStoreLoggedUser => ({
+export const storeLoggedUser = (loggedUser: IUser['_id']): types.IStoreLoggedUser => ({
   type: constants.STORE_LOGGED_USER,
   payload: loggedUser,
 });
@@ -34,4 +39,12 @@ export const storeAccessToken = (accessToken: string): types.IStoreAccessToken =
 });
 export const clearAccessToken = (): types.IClearAccessToken => ({
   type: constants.CLEAR_ACCESS_TOKEN,
+});
+
+export const storeRole = (role: string): types.IStoreRole => ({
+  type: constants.STORE_ROLE,
+  payload: role,
+});
+export const clearRole = (): types.IClearRole => ({
+  type: constants.CLEAR_ROLE,
 });

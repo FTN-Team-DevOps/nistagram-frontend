@@ -15,7 +15,7 @@ export interface IUser extends IResource {
   taggable: boolean;
 }
 export interface IUserSearchParams {
-  id?: IUser['id'];
+  _id?: IUser['_id'];
   username?: IUser['username'];
   email?: IUser['email'];
   name?: IUser['name'];
@@ -27,18 +27,20 @@ export interface IUserSearchParams {
   private?: IUser['private'];
   taggable?: IUser['taggable'];
 }
-export interface IUserCreate extends Omit<IUser, 'id'> {
+export interface IUserCreate extends Omit<IUser, '_id'> {
   password: string;
   isAgent?: boolean;
 }
 export interface IUserUpdate extends IUser {}
 
 // Auth
-export interface IUserWithToken extends IUser {
+export interface IUserWithToken {
+  role: string;
+  user: IUser;
   token: string;
 }
 export interface IUserCredentials {
-  username: string;
+  email: string;
   password: string;
 }
 

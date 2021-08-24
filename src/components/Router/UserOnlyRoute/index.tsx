@@ -6,6 +6,7 @@ import { authSelectors } from '../../../app/auth/auth.selectors';
 
 export const UserOnlyRoute: FunctionComponent<RouteProps> = (props) => {
   const loggedUser = useSelector(authSelectors.selectLoggedUser);
+  const role = useSelector(authSelectors.selectRole);
 
-  return !loggedUser ? <Redirect to={'/login'} /> : <Route {...props} />;
+  return !loggedUser || role !== 'user' ? <Redirect to={'/'} /> : <Route {...props} />;
 };
