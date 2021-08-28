@@ -2,11 +2,11 @@ import { IUserAction, IUserState } from './user/user.types';
 import { IPublicationAction, IPublicationState } from './publication/publication.types';
 import { IActivityAction, IActivityState } from './activity/activity.types';
 import {
-  IPublicationActivities,
+  IPublicationActivitiesAction,
   IPublicationActivitiesState,
 } from './publication-activities/publication-activities.types';
 
-export type IResourcesAction = IUserAction | IPublicationAction | IActivityAction | IPublicationActivities;
+export type IResourcesAction = IUserAction | IPublicationAction | IActivityAction | IPublicationActivitiesAction;
 
 export interface IResourcesState {
   user: IUserState;
