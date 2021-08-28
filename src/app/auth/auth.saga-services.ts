@@ -34,7 +34,11 @@ export function* loadCachedUser() {
   }
 
   try {
-    yield call(logUserIn, { user: JSON.parse(user), token, role } as IUserWithToken);
+    yield call(logUserIn, {
+      user: JSON.parse(user),
+      token: token ? JSON.parse(token) : undefined,
+      role: role ? JSON.parse(role) : undefined,
+    } as IUserWithToken);
   } catch (e) {
     console.error(e);
   }
@@ -60,6 +64,9 @@ export function* logIn(credentials: IUserCredentials) {
 export function* logOut() {
   yield put(actions.clearLoggedUser());
   yield put(actions.clearAccessToken());
+  yield put(actions.clearRole());
 
   yield call([localStorage, localStorage.removeItem], 'logged_user');
+  yield call([localStorage, localStorage.removeItem], 'token');
+  yield call([localStorage, localStorage.removeItem], 'role');
 }

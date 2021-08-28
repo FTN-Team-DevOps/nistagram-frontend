@@ -4,9 +4,21 @@ import { IUser } from '../user/user.types';
 export type TPublicationType = 'post' | 'story';
 export type TPublicationStatus = 'active' | 'deleted';
 
+export interface IPublicationResponse extends IResource {
+  user: IUser['_id'];
+  description: string;
+  pictures: string[];
+  publicationType: TPublicationType;
+  publishedTimeStamp: string;
+  lastChangedTimeStamp: string;
+  endTimeStamp: string | undefined;
+  siteUrl: string | null;
+  status: TPublicationStatus;
+}
+
 export interface IPublication extends IResource {
   user: IUser['_id'];
-  descritpion: string;
+  description: string;
   pictures: string[];
   publicationType: TPublicationType;
   publishedTimeStamp: string;
@@ -21,14 +33,14 @@ export interface IPublicationSearchParams {
   publicationType?: TPublicationType;
 }
 export interface IPublicationCreate {
-  descritpion: string;
+  description: string;
   pictures: string[];
   publicationType: TPublicationType;
   endTimeStamp?: string;
   siteUrl?: string;
 }
 export interface IPublicationUpdate {
-  descritpion?: string;
+  description?: string;
   pictures?: string[];
   publicationType?: TPublicationType;
   endTimeStamp?: string;
