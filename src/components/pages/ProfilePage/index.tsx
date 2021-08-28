@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { authSelectors } from '../../../app/auth/auth.selectors';
 import { openDialog } from '../../../app/dialog/dialog.actions';
-import { createPublication } from '../../../app/page/profile/profile.actions';
+import { createPublication, setupProfilePage } from '../../../app/page/profile/profile.actions';
 import { profilePageSelectors } from '../../../app/page/profile/profile.selectors';
 import { IPublicationCreate } from '../../../app/resource/publication/publication.types';
 import { userSelectors } from '../../../app/resource/user/user.selectors';
 import { defaultPhoto } from '../../../utils/photo.util';
 import { useSelect, useSelectWithParams } from '../../../utils/selector.utils';
 import { PageLayout } from '../common/PageLayout';
+import { Publications } from '../common/Publications';
 import { useProfilePageStyle } from './style';
 import { IProfilePageProps } from './types';
 
@@ -28,8 +29,9 @@ export const ProfilePage: FunctionComponent = () => {
   const isPrivate = useMemo(() => !isCurrentUserProfile && user && user.private, [isCurrentUserProfile, user]);
 
   useEffect(() => {
-    console.log(userId, isCurrentUserProfile, user);
-  }, [isCurrentUserProfile, user, userId]);
+    // console.log(userId, isCurrentUserProfile, user);
+    dispatch(setupProfilePage(userId));
+  }, [dispatch, userId]);
 
   const openPublicationDialog = useCallback(() => {
     dispatch(
@@ -40,8 +42,6 @@ export const ProfilePage: FunctionComponent = () => {
       }),
     );
   }, [dispatch]);
-
-  console.log(publicationIds, isPrivate);
 
   return (
     <PageLayout>
@@ -68,6 +68,9 @@ export const ProfilePage: FunctionComponent = () => {
               <p className={classes.biography}>&ldquo;{user.biography}&rdquo;</p>
             </div>
           </header>
+          <div className={classes.contentWrapper}>
+            <Publications publicationIds={publicationIds} />
+          </div>
         </>
       )}
     </PageLayout>

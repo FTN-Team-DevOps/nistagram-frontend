@@ -1,33 +1,27 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
-import { openDialog } from '../../../app/dialog/dialog.actions';
-
-import { Button } from '@material-ui/core';
+import { setupHomePage } from '../../../app/page/home/home.actions';
+import { homePageSelectors } from '../../../app/page/home/home.selectors';
+import { useSelect } from '../../../utils/selector.utils';
 import { PageLayout } from '../common/PageLayout';
+import { Publications } from '../common/Publications';
+import { useHomePageStyle } from './style';
 
 export const HomePage: FunctionComponent = () => {
+  const classes = useHomePageStyle();
   const dispatch = useDispatch();
 
-  const openConfirmation = useCallback(() => {
-    dispatch(
-      openDialog('confirmation', {
-        title: 'Hello world!',
-        message: 'Look at console!',
-        onDeny: () => {
-          console.log('Deny action');
-        },
-        onConfirm: () => {
-          console.log('Confirm action');
-        },
-      }),
-    );
+  const publicationIds = useSelect(homePageSelectors.selectSearchedPublications);
+
+  useEffect(() => {
+    dispatch(setupHomePage());
   }, [dispatch]);
+
   return (
     <PageLayout>
-      <h1>Hello World, this is Nistagrammm!</h1>
-
-      <Button onClick={openConfirmation}> Click me</Button>
+      <div className={classes.contentWrapper}>
+        <Publications publicationIds={publicationIds} />
+      </div>
     </PageLayout>
   );
 };

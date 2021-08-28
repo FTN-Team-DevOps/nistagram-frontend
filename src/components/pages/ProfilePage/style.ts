@@ -7,6 +7,10 @@ export const useProfilePageStyle = makeStyles((theme) => ({
     padding: '0',
     margin: '0',
   },
+  contentWrapper: {
+    padding: '0',
+    marginTop: '30px',
+  },
   textWrapper: {
     marginLeft: '10px',
   },

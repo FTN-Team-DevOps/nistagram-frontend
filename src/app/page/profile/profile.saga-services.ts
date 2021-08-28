@@ -14,9 +14,14 @@ import { profilePageSelectors } from './profile.selectors';
 export function* setupProfilePage(userId: IUser['_id']) {
   const searchedUsers = (yield call(userResourceService.searchUsers, { _id: userId })) as IUser['_id'];
 
+  const publicationIds = (yield call(publicationResourceService.searchPublications, {
+    user: userId,
+  })) as IPublication['_id'][];
+
   yield put(
     searchedUsers && searchedUsers[0] ? actions.storeSearchedUser(searchedUsers[0]) : actions.clearSearchedUser(),
   );
+  yield put(publicationIds ? actions.storeSearchedPublications(publicationIds) : actions.clearSearchedPublications());
 
   // search publications with userId
   // search actions for favorite publications

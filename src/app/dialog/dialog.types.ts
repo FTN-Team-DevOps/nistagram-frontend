@@ -3,12 +3,14 @@ import * as constants from './dialog.constants';
 
 import { IConfirmationDialogProps } from '../../components/dialogs/ConfirmationDialog/types';
 import { IPublicationDialogProps } from '../../components/dialogs/PublicationDialog/types';
+import { IPublicationViewDialogProps } from '../../components/dialogs/PublicationViewDialog/types';
 
-export type IDialogKey = 'confirmation' | 'publicationDialog';
+export type IDialogKey = 'confirmation' | 'publicationDialog' | 'publicationViewDialog';
 
 interface IDialogInstancePropsInternal {
   confirmation: IConfirmationDialogProps;
   publicationDialog: IPublicationDialogProps;
+  publicationViewDialog: IPublicationViewDialogProps;
 }
 
 export type IDialogInstanceProps<TDialogKey extends IDialogKey = IDialogKey> = TDialogKey extends IDialogKey

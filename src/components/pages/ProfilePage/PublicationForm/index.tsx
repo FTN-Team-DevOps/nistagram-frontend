@@ -76,7 +76,7 @@ export const PublicationForm: FunctionComponent<IPublicationFormProps> = ({ onSu
           Add Picture
         </Button>
         <FormTextInput
-          name="descritpion"
+          name="description"
           label="Description"
           defaultValue=""
           validation={requiredValidation}
