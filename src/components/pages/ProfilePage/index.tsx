@@ -27,6 +27,7 @@ export const ProfilePage: FunctionComponent = () => {
 
   const isCurrentUserProfile = useMemo(() => currentUserId === userId, [currentUserId, userId]);
   const isPrivate = useMemo(() => !isCurrentUserProfile && user && user.private, [isCurrentUserProfile, user]);
+  console.log(isPrivate);
 
   useEffect(() => {
     // console.log(userId, isCurrentUserProfile, user);
