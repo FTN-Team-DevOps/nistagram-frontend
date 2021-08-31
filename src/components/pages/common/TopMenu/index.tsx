@@ -20,6 +20,7 @@ import { useSelect } from '../../../../utils/selector.utils';
 import { authSelectors } from '../../../../app/auth/auth.selectors';
 import { logOut } from '../../../../app/auth/auth.actions';
 import { useDispatch } from 'react-redux';
+import { openDialog } from '../../../../app/dialog/dialog.actions';
 
 export const TopMenu: FunctionComponent = () => {
   const classes = useTopMenuStyles();
@@ -47,6 +48,10 @@ export const TopMenu: FunctionComponent = () => {
     history.push(`/`);
   }, [history]);
 
+  const hadleSearchClick = useCallback(() => {
+    dispatch(openDialog('usersDialog'));
+  }, [dispatch]);
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -56,7 +61,7 @@ export const TopMenu: FunctionComponent = () => {
           <Typography className={classes.title} variant="h6" noWrap onClick={handleHomeClick}>
             Nistagram
           </Typography>
-          <div className={classes.search}>
+          <div className={classes.search} onClick={hadleSearchClick}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>

@@ -56,3 +56,7 @@ export function* createPublication(data: IPublicationCreate) {
   const publicationIds = (yield select(profilePageSelectors.selectSearchedPublications)) as IPublication['_id'][];
   yield put(actions.storeSearchedPublications([...publicationIds, newPublicationId]));
 }
+
+export function* getUsers() {
+  yield call(userResourceService.searchUsers);
+}
