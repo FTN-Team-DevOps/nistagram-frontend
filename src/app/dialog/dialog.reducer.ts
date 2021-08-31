@@ -16,6 +16,9 @@ const closeableState: types.IDialogInstanceState = {
 
 const initialState: types.IDialogState = {
   confirmation: closeableState,
+  publicationDialog: closeableState,
+  publicationViewDialog: closeableState,
+  usersDialog: closeableState,
 };
 
 // exception to the rule, because of dynamic keys on state, it was easier to bundle everything into one reducer

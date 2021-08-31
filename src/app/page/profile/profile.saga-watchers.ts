@@ -16,8 +16,18 @@ function* invokeDeleteUser(action: types.IDeleteUser) {
   yield call(services.deleteUser, action.payload);
 }
 
+function* invokeCreatePublication(action: types.ICreatePublication) {
+  yield call(services.createPublication, action.payload);
+}
+
+function* getUsers(action: types.IGetUsers) {
+  yield call(services.getUsers);
+}
+
 export function* watchProfilePageSaga() {
   yield takeLatest(constants.SETUP_PROFILE_PAGE, invokeSetupProfilePage);
   yield takeLatest(constants.UPDATE_USER, invokeUpdateUser);
   yield takeLatest(constants.DELETE_USER, invokeDeleteUser); // turn off profile...
+  yield takeLatest(constants.CREATE_PUBLICATION, invokeCreatePublication);
+  yield takeLatest(constants.GET_USERS, getUsers);
 }
