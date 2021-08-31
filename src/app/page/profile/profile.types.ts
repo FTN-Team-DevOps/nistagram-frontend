@@ -47,13 +47,26 @@ export interface IClearSearchedPublications {
   type: typeof constants.CLEAR_SEARCHED_PUBLICATIONS;
 }
 
+export interface IGetUsers {
+  type: typeof constants.GET_USERS;
+}
+
+// export interface IStoreUsers {
+//   type: typeof constants.STORE_USERS;
+//   payload: IUser['_id'][];
+// }
+
+// export interface IClearUsers {
+//   type: typeof constants.CLEAR_USERS;
+// }
+
 export type IProfilePageAction =
   | IStoreSearchedUser
   | IClearSearchedUser
   | IStoreSearchedPublications
   | IClearSearchedPublications;
-// | IStoreSearchedActivities
-// | ICLearSearchedActivities
+// | IStoreUsers
+// | IClearUsers;
 
 export interface IProfilePageState {
   searchedUser: IUser['_id'] | null;

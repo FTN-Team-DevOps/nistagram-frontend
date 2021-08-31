@@ -45,3 +45,7 @@ export const storeSearchedPublications = (
 export const clearSearchedPublications = (): types.IClearSearchedPublications => ({
   type: constants.CLEAR_SEARCHED_PUBLICATIONS,
 });
+
+export const getUsers = (): types.IGetUsers => ({
+  type: constants.GET_USERS,
+});
